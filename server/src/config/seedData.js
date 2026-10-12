@@ -1,0 +1,413 @@
+import bcrypt from 'bcryptjs';
+
+export const getSeedData = async () => {
+  const salt = await bcrypt.genSalt(10);
+  const adminPasswordHash = await bcrypt.hash('AdminPass123!', salt);
+  const candidatePasswordHash = await bcrypt.hash('CandidatePass123!', salt);
+
+  const users = [
+    {
+      id: 'usr-admin-1',
+      fullName: 'System Administrator',
+      email: 'admin@careernest.test',
+      phone: '9876543200',
+      password: adminPasswordHash,
+      role: 'admin',
+      headline: 'Platform Administrator & QA Coordinator',
+      skills: ['System Administration', 'QA Governance', 'Node.js', 'Release Management'],
+      createdAt: new Date('2026-01-01T00:00:00Z').toISOString()
+    },
+    {
+      id: 'usr-candidate-1',
+      fullName: 'Test Candidate',
+      email: 'candidate@example.com',
+      phone: '9876543210',
+      password: candidatePasswordHash,
+      role: 'applicant',
+      headline: 'Aspiring Full-Stack & QA Engineer',
+      skills: ['JavaScript', 'Playwright', 'React', 'Manual Testing'],
+      createdAt: new Date('2026-01-02T00:00:00Z').toISOString()
+    },
+    {
+      id: 'usr-candidate-2',
+      fullName: 'John Doe',
+      email: 'john.doe@example.com',
+      phone: '9876543211',
+      password: candidatePasswordHash,
+      role: 'applicant',
+      headline: 'Software Engineer',
+      skills: ['Java', 'SQL', 'Git'],
+      createdAt: new Date('2026-01-03T00:00:00Z').toISOString()
+    }
+  ];
+
+  const jobs = [
+    {
+      id: 1,
+      title: 'Junior Java Developer',
+      company: 'Northstar Digital',
+      location: 'Coimbatore',
+      experience: '0–2 years',
+      salary: '₹3–5 LPA',
+      type: 'Full-time',
+      category: 'Software Development',
+      description: 'Build and maintain Java services, write unit tests, and collaborate with the engineering team.',
+      responsibilities: [
+        'Develop and maintain RESTful web services using Java and Spring Boot',
+        'Write unit and integration tests using JUnit and Mockito',
+        'Collaborate with front-end developers to integrate user-facing elements',
+        'Optimize database queries for PostgreSQL and MySQL'
+      ],
+      skills: ['Java', 'SQL', 'Git'],
+      status: 'active',
+      postedDate: '2026-02-15',
+      deadline: '2026-11-30'
+    },
+    {
+      id: 2,
+      title: 'QA Engineer',
+      company: 'BrightPath Systems',
+      location: 'Chennai',
+      experience: '0–2 years',
+      salary: '₹3–4.5 LPA',
+      type: 'Full-time',
+      category: 'Quality Assurance',
+      description: 'Design test cases, report defects, and automate important web workflows.',
+      responsibilities: [
+        'Author comprehensive test plans and execution suites',
+        'Develop end-to-end regression tests using Playwright and TypeScript',
+        'Execute exploratory manual testing and log detailed bug reports',
+        'Participate in daily stand-ups and sprint retrospective reviews'
+      ],
+      skills: ['Manual Testing', 'Playwright', 'API Testing'],
+      status: 'active',
+      postedDate: '2026-02-18',
+      deadline: '2026-11-30'
+    },
+    {
+      id: 3,
+      title: 'Technical Support Associate',
+      company: 'CloudBridge Services',
+      location: 'Bengaluru',
+      experience: '0–1 years',
+      salary: '₹2.5–3.5 LPA',
+      type: 'Full-time',
+      category: 'Customer Support',
+      description: 'Help customers troubleshoot technical issues and document solutions.',
+      responsibilities: [
+        'Provide tier-1 and tier-2 technical assistance via ticket and chat',
+        'Troubleshoot network, database, and credential issues',
+        'Maintain knowledge base articles and resolution guides'
+      ],
+      skills: ['Communication', 'Troubleshooting', 'SQL'],
+      status: 'active',
+      postedDate: '2026-02-20',
+      deadline: '2026-11-30'
+    },
+    {
+      id: 4,
+      title: 'Business Analyst Trainee',
+      company: 'BluePeak Consulting',
+      location: 'Remote',
+      experience: 'Fresher',
+      salary: '₹3–4 LPA',
+      type: 'Hybrid',
+      category: 'Product & Analytics',
+      description: 'Gather requirements, prepare process documentation, and support stakeholder reviews.',
+      responsibilities: [
+        'Analyze business workflows and document user stories',
+        'Create functional requirement specifications and flow diagrams',
+        'Liaise between business clients and software engineering teams'
+      ],
+      skills: ['Excel', 'Documentation', 'Analysis'],
+      status: 'active',
+      postedDate: '2026-02-22',
+      deadline: '2026-11-30'
+    },
+    {
+      id: 5,
+      title: 'Frontend Developer Intern',
+      company: 'PixelWorks Studio',
+      location: 'Coimbatore',
+      experience: 'Fresher',
+      salary: '₹12,000–18,000/month',
+      type: 'Internship',
+      category: 'Software Development',
+      description: 'Create responsive interfaces and work with designers and developers.',
+      responsibilities: [
+        'Translate UI/UX wireframes into responsive HTML/CSS/JavaScript components',
+        'Ensure cross-browser compatibility and mobile responsiveness',
+        'Participate in code reviews and pair programming sessions'
+      ],
+      skills: ['HTML', 'CSS', 'JavaScript'],
+      status: 'active',
+      postedDate: '2026-02-25',
+      deadline: '2026-11-30'
+    },
+    {
+      id: 6,
+      title: 'IT Operations Associate',
+      company: 'Evergreen Tech',
+      location: 'Hyderabad',
+      experience: '0–2 years',
+      salary: '₹2.8–4 LPA',
+      type: 'Full-time',
+      category: 'IT & Infrastructure',
+      description: 'Monitor IT systems, resolve service requests, and maintain operational records.',
+      responsibilities: [
+        'Monitor server uptime, cloud instances, and network devices',
+        'Handle workstation onboarding and hardware provisioning',
+        'Ensure security compliance and patch management'
+      ],
+      skills: ['Windows', 'Networking', 'Service Desk'],
+      status: 'active',
+      postedDate: '2026-03-01',
+      deadline: '2026-11-30'
+    },
+    {
+      id: 7,
+      title: 'Full Stack React & Node Developer',
+      company: 'NovaForge Tech',
+      location: 'Bengaluru',
+      experience: '2+ years',
+      salary: '₹8–12 LPA',
+      type: 'Full-time',
+      category: 'Software Development',
+      description: 'Architect scalable web applications using React 19, Node.js, and modern cloud patterns.',
+      responsibilities: [
+        'Design microservices and secure REST APIs with Node.js',
+        'Build high-performance React frontends with state management',
+        'Lead code quality initiatives and CI/CD pipelines'
+      ],
+      skills: ['React', 'Node.js', 'TypeScript', 'PostgreSQL'],
+      status: 'active',
+      postedDate: '2026-03-05',
+      deadline: '2026-12-15'
+    },
+    {
+      id: 8,
+      title: 'SDET Automation Specialist',
+      company: 'Apex Quality Labs',
+      location: 'Pune',
+      experience: '1–2 years',
+      salary: '₹6–8 LPA',
+      type: 'Full-time',
+      category: 'Quality Assurance',
+      description: 'Build test automation frameworks with Playwright, execute performance tests, and drive shift-left testing.',
+      responsibilities: [
+        'Implement scalable Playwright end-to-end suites with CI integration',
+        'Perform API test automation using Supertest and Postman',
+        'Track and report quality metrics, defect escape rates, and flakiness'
+      ],
+      skills: ['Playwright', 'Selenium', 'CI-CD', 'TypeScript'],
+      status: 'active',
+      postedDate: '2026-03-08',
+      deadline: '2026-12-15'
+    },
+    {
+      id: 9,
+      title: 'Junior DevOps Engineer',
+      company: 'CloudScale Solutions',
+      location: 'Hyderabad',
+      experience: '0–2 years',
+      salary: '₹5–7 LPA',
+      type: 'Full-time',
+      category: 'DevOps & Cloud',
+      description: 'Support cloud deployments, configure Docker containers, and maintain GitHub Actions workflows.',
+      responsibilities: [
+        'Maintain automated deployment pipelines with GitHub Actions',
+        'Containerize applications with Docker and assist Kubernetes clusters',
+        'Monitor infrastructure health and error tracking'
+      ],
+      skills: ['Docker', 'Kubernetes', 'Linux', 'AWS'],
+      status: 'active',
+      postedDate: '2026-03-10',
+      deadline: '2026-12-15'
+    },
+    {
+      id: 10,
+      title: 'Data Analyst Trainee',
+      company: 'InsightMetrics Analytics',
+      location: 'Chennai',
+      experience: 'Fresher',
+      salary: '₹3.5–5 LPA',
+      type: 'Full-time',
+      category: 'Product & Analytics',
+      description: 'Transform raw data into actionable business intelligence using SQL, Python, and PowerBI dashboards.',
+      responsibilities: [
+        'Query relational databases and build data cleanup pipelines',
+        'Design executive dashboards in PowerBI and Tableau',
+        'Conduct exploratory data analysis and statistical validation'
+      ],
+      skills: ['Python', 'SQL', 'PowerBI', 'Statistics'],
+      status: 'active',
+      postedDate: '2026-03-12',
+      deadline: '2026-12-15'
+    },
+    {
+      id: 11,
+      title: 'UI/UX Product Designer',
+      company: 'DesignCraft Studios',
+      location: 'Remote',
+      experience: '1–2 years',
+      salary: '₹4.5–6 LPA',
+      type: 'Full-time',
+      category: 'Design',
+      description: 'Craft intuitive user interfaces and design systems for mobile and web SaaS applications.',
+      responsibilities: [
+        'Create high-fidelity wireframes and interactive prototypes in Figma',
+        'Conduct user research and usability testing sessions',
+        'Maintain atomic design system components'
+      ],
+      skills: ['Figma', 'Wireframing', 'Design Systems', 'User Research'],
+      status: 'active',
+      postedDate: '2026-03-15',
+      deadline: '2026-12-15'
+    },
+    {
+      id: 12,
+      title: 'Python Backend Developer',
+      company: 'CyberNautic Labs',
+      location: 'Bengaluru',
+      experience: '0–2 years',
+      salary: '₹4–6 LPA',
+      type: 'Full-time',
+      category: 'Software Development',
+      description: 'Build fast and reliable asynchronous backend services using FastAPI, Python, and Redis.',
+      responsibilities: [
+        'Develop async endpoints and data ingestion pipelines',
+        'Manage caching layers with Redis and database queries in SQLAlchemy',
+        'Write automated pytest suites'
+      ],
+      skills: ['Python', 'FastAPI', 'Redis', 'PostgreSQL'],
+      status: 'active',
+      postedDate: '2026-03-18',
+      deadline: '2026-12-15'
+    },
+    {
+      id: 13,
+      title: 'Cybersecurity Analyst',
+      company: 'ShieldGuard Systems',
+      location: 'Remote',
+      experience: '1–2 years',
+      salary: '₹5–7.5 LPA',
+      type: 'Full-time',
+      category: 'Security',
+      description: 'Perform vulnerability assessments, audit security policies, and analyze system audit logs.',
+      responsibilities: [
+        'Conduct vulnerability scans and static/dynamic code audits',
+        'Enforce OWASP Top 10 security best practices across APIs',
+        'Respond to security events and audit reports'
+      ],
+      skills: ['Network Security', 'OWASP', 'Vulnerability Assessment'],
+      status: 'active',
+      postedDate: '2026-03-20',
+      deadline: '2026-12-15'
+    },
+    {
+      id: 14,
+      title: 'Mobile App Developer (Flutter)',
+      company: 'SwiftApp Innovators',
+      location: 'Coimbatore',
+      experience: '0–2 years',
+      salary: '₹3.5–5.5 LPA',
+      type: 'Full-time',
+      category: 'Software Development',
+      description: 'Build cross-platform iOS and Android applications with Flutter and Firebase.',
+      responsibilities: [
+        'Develop smooth mobile interfaces with Flutter widgets and Bloc state management',
+        'Integrate push notifications, offline cache, and analytics',
+        'Test and publish apps on Google Play and Apple App Store'
+      ],
+      skills: ['Flutter', 'Dart', 'Firebase', 'Mobile UI'],
+      status: 'active',
+      postedDate: '2026-03-22',
+      deadline: '2026-12-15'
+    },
+    {
+      id: 15,
+      title: 'Machine Learning Research Intern',
+      company: 'NeuraLogic AI',
+      location: 'Remote',
+      experience: 'Fresher',
+      salary: '₹20,000–25,000/month',
+      type: 'Internship',
+      category: 'Product & Analytics',
+      description: 'Experiment with NLP models, document processing, and PyTorch deep learning pipelines.',
+      responsibilities: [
+        'Fine-tune open-source LLMs and NLP classifiers',
+        'Build data preprocessing pipelines for training datasets',
+        'Evaluate benchmark model performance and accuracy metrics'
+      ],
+      skills: ['Python', 'PyTorch', 'NLP', 'Pandas'],
+      status: 'active',
+      postedDate: '2026-03-25',
+      deadline: '2026-12-15'
+    },
+    {
+      id: 16,
+      title: 'Legacy Mainframe Support Specialist',
+      company: 'ArchivedTech Solutions',
+      location: 'Chennai',
+      experience: '2+ years',
+      salary: '₹4–5 LPA',
+      type: 'Full-time',
+      category: 'IT & Infrastructure',
+      description: 'Maintain legacy COBOL routines and batch processing scripts. Note: This listing is closed and no longer accepting applications.',
+      responsibilities: [
+        'Monitor nocturnal batch jobs',
+        'Review COBOL change orders'
+      ],
+      skills: ['COBOL', 'Mainframe', 'JCL'],
+      status: 'closed',
+      postedDate: '2025-10-01',
+      deadline: '2025-12-31'
+    }
+  ];
+
+  const applications = [
+    {
+      id: 'app-seed-1',
+      referenceId: 'CN-8942101',
+      jobId: 2,
+      jobTitle: 'QA Engineer',
+      company: 'BrightPath Systems',
+      userId: 'usr-candidate-1',
+      fullName: 'Test Candidate',
+      email: 'candidate@example.com',
+      phone: '9876543210',
+      experience: '0–1 years',
+      skills: 'Playwright, Manual Testing, Postman, JavaScript',
+      coverLetter: 'I am passionate about software quality assurance and automating end-to-end tests.',
+      resumeFileName: 'test_candidate_resume.pdf',
+      status: 'Under Review',
+      statusHistory: [
+        { status: 'Submitted', timestamp: '2026-03-01T10:00:00Z', note: 'Application received' },
+        { status: 'Under Review', timestamp: '2026-03-03T14:30:00Z', note: 'Profile forwarded to QA lead' }
+      ],
+      createdAt: '2026-03-01T10:00:00Z'
+    },
+    {
+      id: 'app-seed-2',
+      referenceId: 'CN-8942102',
+      jobId: 1,
+      jobTitle: 'Junior Java Developer',
+      company: 'Northstar Digital',
+      userId: 'usr-candidate-1',
+      fullName: 'Test Candidate',
+      email: 'candidate@example.com',
+      phone: '9876543210',
+      experience: 'Fresher',
+      skills: 'Java, OOP, Spring Boot, Git',
+      coverLetter: 'Eager to build robust Java backends and learn enterprise architecture.',
+      resumeFileName: 'test_candidate_resume.pdf',
+      status: 'Submitted',
+      statusHistory: [
+        { status: 'Submitted', timestamp: '2026-03-05T09:15:00Z', note: 'Application received' }
+      ],
+      createdAt: '2026-03-05T09:15:00Z'
+    }
+  ];
+
+  return { users, jobs, applications };
+};

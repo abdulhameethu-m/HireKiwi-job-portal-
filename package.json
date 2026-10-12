@@ -1,0 +1,50 @@
+{
+  "name": "mock-job-portal-qa",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Local mock job portal and Playwright QA assessment project",
+  "type": "module",
+  "scripts": {
+    "start": "node scripts/start-all.js",
+    "server": "node server/src/index.js",
+    "client": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "seed": "node scripts/seed.js",
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:report": "playwright show-report",
+    "test:unit": "vitest run tests/unit",
+    "test:api": "vitest run tests/api",
+    "test:all": "vitest run tests/unit tests/api && playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.55.0",
+    "@vitejs/plugin-react": "^4.7.0",
+    "autoprefixer": "^10.6.1",
+    "concurrently": "^10.0.6",
+    "postcss": "^8.5.29",
+    "supertest": "^7.3.1",
+    "tailwindcss": "^3.4.19",
+    "vite": "^6.3.0",
+    "vitest": "^5.0.4"
+  },
+  "dependencies": {
+    "axios": "^1.20.0",
+    "bcryptjs": "^3.0.3",
+    "clsx": "^2.1.1",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.7",
+    "express": "^5.3.0",
+    "express-rate-limit": "^8.7.1",
+    "helmet": "^8.3.0",
+    "jsonwebtoken": "^9.0.3",
+    "lucide-react": "^1.55.0",
+    "multer": "^2.4.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "react-router-dom": "^7.18.4",
+    "tailwind-merge": "^3.7.0",
+    "zod": "^4.6.6"
+  }
+}

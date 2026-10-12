@@ -1,0 +1,52 @@
+name: CareerNest QA Lab CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    name: Run Unit, API & Playwright Test Suites
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Seed Deterministic Mock Database
+        run: npm run seed
+
+      - name: Run Vitest Unit Tests
+        run: npm run test:unit
+
+      - name: Run Supertest API Tests
+        run: npm run test:api
+
+      - name: Build Frontend Application
+        run: npm run build
+
+      - name: Run Playwright E2E Tests
+        run: npx playwright test
+
+      - name: Upload Playwright Test Report Artifact
+        uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 14
